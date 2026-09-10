@@ -247,6 +247,32 @@ body {
   align-items: center;
 }
 
+.lang-toggle-btn {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid var(--border-gold);
+  color: var(--accent-gold);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.lang-toggle-btn:active {
+  background: var(--accent-gold);
+  color: #0f172a;
+}
+
+.lang-toggle-btn.mini {
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  border-radius: 12px;
+}
+
 .header-pm-profile {
   display: flex;
   align-items: center;

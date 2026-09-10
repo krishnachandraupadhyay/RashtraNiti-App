@@ -20,41 +20,47 @@
          HOME SCREEN
          ========================================================================= -->
     <div id="screen-home" class="app-screen active">
+      <div style="width: 100%; display: flex; justify-content: flex-end; margin-bottom: 8px;">
+        <button class="lang-toggle-btn" onclick="window.gameApp.toggleLanguage()">
+          🌐 <span id="home-lang-label">English</span>
+        </button>
+      </div>
+
       <div>
         <div class="home-emblem-badge">
-          <span>🏛️</span> गणतांत्रिक नीति सिमुलेशन
+          <span>🏛️</span> <span data-i18n="republicTag">गणतांत्रिक नीति सिमुलेशन</span>
         </div>
-        <h1 class="game-title-main">राष्ट्रनीति</h1>
-        <p class="game-subtitle">Democracy, Government & Budget Simulation</p>
+        <h1 class="game-title-main" data-i18n="appName">राष्ट्रनीति</h1>
+        <p class="game-subtitle" data-i18n="appTagline">Democracy, Government & Budget Simulation</p>
         
         <div class="home-avatar-box">
           <div id="home-avatar-preview" class="pm-avatar-container"></div>
         </div>
 
         <div class="home-input-card">
-          <label class="input-label">देश का नाम (Country Name):</label>
+          <label class="input-label" data-i18n="countryNameLabel">देश का नाम (Country Name):</label>
           <input type="text" id="input-country-name" class="custom-text-input" value="गणराज्य भारतवर्ष (Bharatvarsha)" />
 
-          <label class="input-label">प्रधानमंत्री / आपका नाम (PM Name):</label>
+          <label class="input-label" data-i18n="pmNameLabel">प्रधानमंत्री / आपका नाम (PM Name):</label>
           <input type="text" id="input-pm-name" class="custom-text-input" value="माननीय प्रधानमंत्री" />
         </div>
       </div>
 
       <div class="home-buttons-group">
         <button id="btn-start-game" class="btn-primary" onclick="window.gameApp.startNewGame()">
-          <span>🇮🇳</span> नया खेल शुरू करें (New Game)
+          <span>🇮🇳</span> <span data-i18n="newGame">नया खेल शुरू करें (New Game)</span>
         </button>
 
         <button id="btn-continue-game" class="btn-secondary" style="display: none;" onclick="window.gameApp.loadGame()">
-          <span>▶️</span> सहेजा गया खेल जारी रखें (Continue)
+          <span>▶️</span> <span data-i18n="continueGame">सहेजा गया खेल जारी रखें (Continue)</span>
         </button>
 
         <button class="btn-secondary" onclick="window.gameApp.switchScreen('screen-avatar')">
-          <span>👤</span> अवतार बदलें / फोटो अपलोड करें
+          <span>👤</span> <span data-i18n="customizeAvatar">अवतार बदलें / फोटो अपलोड करें</span>
         </button>
 
         <button class="btn-secondary" onclick="document.getElementById('modal-settings').classList.add('open')">
-          <span>⚙️</span> सेटिंग्स व APK गाइड (Settings)
+          <span>⚙️</span> <span data-i18n="settings">सेटिंग्स व APK गाइड (Settings)</span>
         </button>
       </div>
     </div>
@@ -71,8 +77,13 @@
             <span class="header-country-sub val-country-name">गणराज्य भारतवर्ष</span>
           </div>
         </div>
-        <div class="header-year-pill">
-          <span class="val-year">वर्ष 1 (कार्यकाल 1)</span>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button class="lang-toggle-btn mini" onclick="window.gameApp.toggleLanguage()">
+            🌐 <span id="header-lang-label">ENG</span>
+          </button>
+          <div class="header-year-pill">
+            <span class="val-year">वर्ष 1 (कार्यकाल 1)</span>
+          </div>
         </div>
       </div>
     </header>
@@ -491,17 +502,37 @@
       </div>
     </div>
 
+    <!-- Language Selection Modal (On First Launch / Header Switch) -->
+    <div id="modal-language" class="modal-overlay">
+      <div class="modal-card" style="text-align: center;">
+        <div class="event-badge-tag" style="margin: 0 auto; background: rgba(245, 158, 11, 0.15); border-color: var(--accent-gold); color: var(--accent-gold);">
+          <span>🌐</span> Language / भाषा
+        </div>
+        <h2 style="font-size: 1.25rem; font-weight: 800; margin: 6px 0;">अपनी भाषा चुनें<br /><span style="font-size: 1rem; color: var(--text-secondary); font-weight: 500;">Select Preferred Language</span></h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+          <button class="btn-primary" style="font-size: 1.05rem;" onclick="window.gameApp.setLanguage('hi')">
+            <span>🇮🇳</span> हिंदी (Hindi)
+          </button>
+          <button class="btn-secondary" style="font-size: 1.05rem;" onclick="window.gameApp.setLanguage('en')">
+            <span>🇬🇧</span> English (English)
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- Scripts -->
-  <script src="src/audio.js?v=3"></script>
-  <script src="src/avatar.js?v=3"></script>
-  <script src="src/data/factions.js?v=3"></script>
-  <script src="src/data/policies.js?v=3"></script>
-  <script src="src/data/events.js?v=3"></script>
-  <script src="src/simulation.js?v=3"></script>
-  <script src="src/elections.js?v=3"></script>
-  <script src="src/game.js?v=3"></script>
+  <script src="src/audio.js?v=4"></script>
+  <script src="src/avatar.js?v=4"></script>
+  <script src="src/data/i18n.js?v=4"></script>
+  <script src="src/data/factions.js?v=4"></script>
+  <script src="src/data/policies.js?v=4"></script>
+  <script src="src/data/events.js?v=4"></script>
+  <script src="src/simulation.js?v=4"></script>
+  <script src="src/elections.js?v=4"></script>
+  <script src="src/game.js?v=4"></script>
 
   <!-- PWA Service Worker Registration -->
   <script>

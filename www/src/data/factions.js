@@ -112,7 +112,8 @@ const GAME_FACTIONS = {
       defaultPercent: 12,
       minPercent: 3,
       maxPercent: 25,
-      desc: 'Builds world-class universities, schools, and drives long-term human capital & GDP growth.'
+      desc: 'Builds world-class universities, schools, and drives long-term human capital & GDP growth.',
+      descHindi: 'विश्वस्तरीय विश्वविद्यालय, स्कूल और दीर्घकालिक मानव संसाधन व जीडीपी वृद्धि।'
     },
     {
       id: 'healthcare',
@@ -122,7 +123,8 @@ const GAME_FACTIONS = {
       defaultPercent: 11,
       minPercent: 3,
       maxPercent: 25,
-      desc: 'Subsidized hospitals, diagnostic centers, and epidemic resilience. Boosts public satisfaction.'
+      desc: 'Subsidized hospitals, diagnostic centers, and epidemic resilience. Boosts public satisfaction.',
+      descHindi: 'रियायती अस्पताल, जांच केंद्र और महामारी सुरक्षा। जनसंतुष्टि में सुधार।'
     },
     {
       id: 'defence',
@@ -132,7 +134,8 @@ const GAME_FACTIONS = {
       defaultPercent: 14,
       minPercent: 5,
       maxPercent: 30,
-      desc: 'Modernizes armed forces, border infrastructure, and indigenous aerospace deterrence.'
+      desc: 'Modernizes armed forces, border infrastructure, and indigenous deterrence.',
+      descHindi: 'सशस्त्र बलों का आधुनिकीकरण, सीमा सुरक्षा और स्वदेशी रक्षा उत्पादन।'
     },
     {
       id: 'agriculture',
@@ -142,7 +145,8 @@ const GAME_FACTIONS = {
       defaultPercent: 13,
       minPercent: 4,
       maxPercent: 25,
-      desc: 'Canal networks, cold storage, fertilizer subsidies, and crop insurance safety nets.'
+      desc: 'Canal networks, cold storage, fertilizer subsidies, and crop insurance safety nets.',
+      descHindi: 'नहर नेटवर्क, कोल्ड स्टोरेज, खाद सब्सिडी और फसल बीमा सुरक्षा।'
     },
     {
       id: 'infrastructure',
@@ -152,7 +156,8 @@ const GAME_FACTIONS = {
       defaultPercent: 15,
       minPercent: 5,
       maxPercent: 30,
-      desc: 'High-speed railways, port modernizations, freight corridors, and power transmission.'
+      desc: 'High-speed railways, port modernizations, freight corridors, and power transmission.',
+      descHindi: 'हाई-स्पीड रेलवे, बंदरगाह आधुनिकीकरण, फ्रेट कॉरिडोर और बिजली ग्रिड।'
     },
     {
       id: 'employment',
@@ -162,7 +167,8 @@ const GAME_FACTIONS = {
       defaultPercent: 11,
       minPercent: 3,
       maxPercent: 22,
-      desc: 'Apprenticeships, manufacturing incentives (PLI), and credit subsidies for small businesses.'
+      desc: 'Apprenticeships, manufacturing incentives (PLI), and credit subsidies for small businesses.',
+      descHindi: 'इंटर्नशिप, विनिर्माण प्रोत्साहन (PLI) और छोटे उद्योगों को सस्ता कर्ज।'
     },
     {
       id: 'technology',
@@ -172,7 +178,8 @@ const GAME_FACTIONS = {
       defaultPercent: 9,
       minPercent: 2,
       maxPercent: 20,
-      desc: 'Semiconductor fabs, space exploration, supercomputing, and digital public infrastructure.'
+      desc: 'Semiconductor fabs, space exploration, supercomputing, and digital infrastructure.',
+      descHindi: 'सेमीकंडक्टर चिप प्लांट, अंतरिक्ष मिशन, सुपरकंप्यूटिंग और डिजिटल इंफ्रास्ट्रक्चर।'
     },
     {
       id: 'environment',
@@ -182,7 +189,8 @@ const GAME_FACTIONS = {
       defaultPercent: 7,
       minPercent: 2,
       maxPercent: 18,
-      desc: 'Solar & wind farms, river rejuvenation, urban air quality filters, and carbon reduction.'
+      desc: 'Solar & wind farms, river rejuvenation, urban air quality, and carbon reduction.',
+      descHindi: 'सौर व पवन ऊर्जा पार्क, नदी पुनरुद्धार, स्वच्छ हवा और कार्बन कटौती।'
     },
     {
       id: 'social_welfare',
@@ -192,7 +200,8 @@ const GAME_FACTIONS = {
       defaultPercent: 8,
       minPercent: 2,
       maxPercent: 22,
-      desc: 'Elderly pensions, food security rations, disability support, and poverty alleviation.'
+      desc: 'Elderly pensions, food security rations, disability support, and poverty alleviation.',
+      descHindi: 'बुजुर्ग पेंशन, खाद्य सुरक्षा राशन, दिव्यांग सहायता और गरीबी उन्मूलन।'
     }
   ],
 
