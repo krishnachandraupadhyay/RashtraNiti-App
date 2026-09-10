@@ -8,42 +8,54 @@ const GAME_FACTIONS = {
       {
         id: 'ruling_rpd',
         name: 'Rashtriya Pragati Dal (RPD)',
+        nameHindi: 'राष्ट्रीय प्रगति दल (RPD)',
         shortName: 'RPD',
         color: '#f59e0b', // Saffron-Gold
         alignment: 'Ruling Coalition (Center-Right/Development)',
+        alignmentHindi: 'सत्तारूढ़ गठबंधन (विकास एवं सुशासन)',
         initialSeats: 285,
         loyalty: 80,
-        ideology: 'Economic Growth, Infrastructure & Strong Defense'
+        ideology: 'Economic Growth, Infrastructure & Strong Defense',
+        ideologyHindi: 'आर्थिक विकास, आधुनिक बुनियादी ढांचा व मजबूत सुरक्षा'
       },
       {
         id: 'opp_jvf',
         name: 'Janata Vikas Front (JVF)',
+        nameHindi: 'जनता विकास मोर्चा (JVF)',
         shortName: 'JVF',
         color: '#3b82f6', // Navy Blue
         alignment: 'Main Opposition (Social Democratic)',
+        alignmentHindi: 'मुख्य विपक्ष (सामाजिक कल्याण व न्याय)',
         initialSeats: 165,
         loyalty: 35,
-        ideology: 'Welfare, Farmer Subsidies & Labor Rights'
+        ideology: 'Welfare, Farmer Subsidies & Labor Rights',
+        ideologyHindi: 'कृषक सब्सिडी, श्रमिक कल्याण व सामाजिक सुरक्षा'
       },
       {
         id: 'opp_nkd',
         name: 'Nav-Kranti Dal (NKD)',
+        nameHindi: 'नव-क्रांति दल (NKD)',
         shortName: 'NKD',
         color: '#10b981', // Emerald Green
         alignment: 'Reformist / Progressive Block',
+        alignmentHindi: 'सुधारवादी प्रगतिशील दल',
         initialSeats: 55,
         loyalty: 50,
-        ideology: 'Education, Green Energy & Digital Governance'
+        ideology: 'Education, Green Energy & Digital Governance',
+        ideologyHindi: 'आधुनिक शिक्षा, सौर ऊर्जा व डिजिटल पारदर्शी शासन'
       },
       {
         id: 'independent',
         name: 'Regional Federations & Independents',
+        nameHindi: 'क्षेत्रीय दल एवं निर्दलीय सदस्य',
         shortName: 'IND',
         color: '#8b5cf6', // Violet
         alignment: 'Swing Votes / Regional Interests',
+        alignmentHindi: 'क्षेत्रीय स्वायत्तता व स्थानीय विकास',
         initialSeats: 38,
         loyalty: 55,
-        ideology: 'State Autonomy & Local Infrastructure'
+        ideology: 'State Autonomy & Local Infrastructure',
+        ideologyHindi: 'राज्यों के अधिकार एवं प्रांतीय परियोजनाएं'
       }
     ]
   },

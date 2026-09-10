@@ -68,6 +68,7 @@ class SimulationEngine {
       lastYearReport: {
         summary: 'Your administration assumed office with a decisive mandate for development and economic reform.',
         headline: 'NEW GOVERNMENT TAKES CHARGE WITH VISION OF PROSPERITY',
+        headlineHindi: 'नई सरकार ने विकास और समृद्धि के संकल्प के साथ कार्यभार संभाला',
         keyAchievements: ['Parliament convened successfully', 'Initial Five-Year Plan announced']
       }
     };
@@ -256,10 +257,20 @@ class SimulationEngine {
 
     // Generate Newspaper Headline for Year in Review
     let headline = 'NATION CHARTS STEADY PATH OF ECONOMIC CONSOLIDATION';
-    if (growth >= 8.0) headline = 'RECORD GDP EXPANSION PROPELS NATION TO GLOBAL PROMINENCE';
-    else if (growth <= 3.5) headline = 'ECONOMIC HEADWINDS CLOUD GROWTH PROJECTIONS';
-    else if (inflation >= 8.5) headline = 'PRICES SURGE SHARPLY AS CONSUMERS FEEL PINCH';
-    else if (overallApproval >= 78) headline = 'PUBLIC CONFIDENCE IN PRIME MINISTER SOARS TO RECORD PEAK';
+    let headlineHindi = 'राष्ट्र आर्थिक सुदृढ़ीकरण और विकास की स्थिर राह पर अग्रसर';
+    if (growth >= 8.0) {
+      headline = 'RECORD GDP EXPANSION PROPELS NATION TO GLOBAL PROMINENCE';
+      headlineHindi = 'रिकॉर्ड जीडीपी विकास दर से वैश्विक स्तर पर देश का दबदबा बढ़ा';
+    } else if (growth <= 3.5) {
+      headline = 'ECONOMIC HEADWINDS CLOUD GROWTH PROJECTIONS';
+      headlineHindi = 'वैश्विक मंदी और आर्थिक चुनौतियों से विकास की रफ्तार सुस्त';
+    } else if (inflation >= 8.5) {
+      headline = 'PRICES SURGE SHARPLY AS CONSUMERS FEEL PINCH';
+      headlineHindi = 'बाजार में महंगाई की मार, आम जनता की जेब पर बढ़ा बोझ';
+    } else if (overallApproval >= 78) {
+      headline = 'PUBLIC CONFIDENCE IN PRIME MINISTER SOARS TO RECORD PEAK';
+      headlineHindi = 'प्रधानमंत्री की नीतियों पर जनता का अटूट विश्वास, जनसमर्थन चरम पर';
+    }
 
     // Commit new state values
     s.gdpTrillion = newGdpTrillion;
@@ -277,6 +288,7 @@ class SimulationEngine {
       term: s.term,
       termYear: s.termYear,
       headline: headline,
+      headlineHindi: headlineHindi,
       growth: growth,
       inflation: inflation,
       unemployment: unemployment,

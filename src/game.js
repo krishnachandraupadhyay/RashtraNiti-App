@@ -45,10 +45,7 @@ class RashtraNitiApp {
   toggleLanguage() {
     const current = this.i18n.getLang();
     const next = current === 'hi' ? 'en' : 'hi';
-    this.setLanguage(next);
-  }
-
-  updateStaticTranslations() {
+     updateStaticTranslations() {
     const lang = this.i18n.getLang();
 
     // Toggle labels
@@ -65,6 +62,28 @@ class RashtraNitiApp {
         el.textContent = this.i18n.t(key);
       }
     });
+
+    // Update default inputs if untouched
+    const countryInput = document.getElementById('input-country-name');
+    if (countryInput) {
+      if (
+        countryInput.value === 'गणराज्य भारतवर्ष' ||
+        countryInput.value === 'Republic of Bharatvarsha' ||
+        countryInput.value === 'गणराज्य भारतवर्ष (Bharatvarsha)'
+      ) {
+        countryInput.value = this.i18n.t('countryDefault');
+      }
+    }
+
+    const pmInput = document.getElementById('input-pm-name');
+    if (pmInput) {
+      if (
+        pmInput.value === 'माननीय प्रधानमंत्री' ||
+        pmInput.value === 'Honorable Prime Minister'
+      ) {
+        pmInput.value = this.i18n.t('pmDefault');
+      }
+    }
 
     // Translate bottom nav
     const navItems = {
@@ -102,7 +121,7 @@ class RashtraNitiApp {
         avatar: this.avatar.config
       };
       localStorage.setItem('rashtraniti_gamestate', JSON.stringify(payload));
-      this.showToast('💾 खेल की प्रगति स्वतः सहेज ली गई है (Game Saved)');
+      this.showToast(this.i18n.getLang() === 'hi' ? '💾 खेल की प्रगति सहेज ली गई' : '💾 Game progress saved');
     } catch (e) {
       console.warn('Save failed', e);
     }
@@ -121,7 +140,7 @@ class RashtraNitiApp {
         this.sound.playSuccess();
         this.switchScreen('screen-dashboard');
         this.renderAll();
-        this.showToast('सहेजा गया खेल लोड हो गया (Game Loaded)');
+        this.showToast(this.i18n.getLang() === 'hi' ? 'सहेजा गया खेल लोड हो गया' : 'Saved game loaded successfully');
         return true;
       }
     } catch (e) {
@@ -139,15 +158,19 @@ class RashtraNitiApp {
     const pmInput = document.getElementById('input-pm-name');
     if (countryInput && countryInput.value.trim()) {
       this.sim.state.countryName = countryInput.value.trim();
+    } else {
+      this.sim.state.countryName = this.i18n.t('countryDefault');
     }
     if (pmInput && pmInput.value.trim()) {
       this.sim.state.pmName = pmInput.value.trim();
+    } else {
+      this.sim.state.pmName = this.i18n.t('pmDefault');
     }
 
     this.saveGame();
     this.switchScreen('screen-dashboard');
     this.renderAll();
-    this.showToast('✨ नया कार्यकाल शुरू! राष्ट्र की सेवा में आपका स्वागत है।');
+    this.showToast(this.i18n.getLang() === 'hi' ? '✨ नया कार्यकाल शुरू! राष्ट्र की सेवा में आपका स्वागत है।' : '✨ New Term Commenced! Welcome Prime Minister.');
   }
 
   switchScreen(screenId) {
@@ -193,6 +216,7 @@ class RashtraNitiApp {
   }
 
   renderAll() {
+    this.updateStaticTranslations();
     this.renderAvatarPreview();
     this.renderDashboard();
     this.renderBudgetScreen();
@@ -275,7 +299,7 @@ class RashtraNitiApp {
         .map((d) => {
           const sat = s.demographicSatisfaction[d.id] || 50;
           let colorClass = sat >= 60 ? 'bar-green' : sat >= 45 ? 'bar-amber' : 'bar-red';
-          const title = lang === 'hi' ? d.nameHindi : d.name;
+          const title = lang === 'hi' ? (d.nameHindi || d.name) : d.name;
           return `
             <div class="demo-card">
               <div class="demo-header">
@@ -299,7 +323,8 @@ class RashtraNitiApp {
     if (ticker && s.lastYearReport) {
       const gdpLbl = lang === 'hi' ? 'जीडीपी' : 'GDP';
       const infLbl = lang === 'hi' ? 'महंगाई' : 'Inflation';
-      ticker.textContent = `📢 ${s.lastYearReport.headline} • ${gdpLbl} ₹${s.gdpTrillion}T • ${infLbl} ${s.inflationRate}%`;
+      const headline = lang === 'hi' ? (s.lastYearReport.headlineHindi || s.lastYearReport.headline) : s.lastYearReport.headline;
+      ticker.textContent = `📢 ${headline} • ${gdpLbl} ₹${s.gdpTrillion}T • ${infLbl} ${s.inflationRate}%`;
     }
   }
 
@@ -396,7 +421,7 @@ class RashtraNitiApp {
       .map((sec) => {
         const currentVal = s.sectorAllocations[sec.id] || sec.defaultPercent;
         const amountBillion = Math.round((s.totalBudgetBillion * currentVal) / 100);
-        const name = lang === 'hi' ? sec.nameHindi : sec.name;
+        const name = lang === 'hi' ? (sec.nameHindi || sec.name) : sec.name;
         const desc = lang === 'hi' ? (sec.descHindi || sec.desc) : sec.desc;
 
         return `
@@ -460,7 +485,7 @@ class RashtraNitiApp {
   confirmBudgetAndAdvance() {
     const totals = this.sim.calculateBudgetTotals(this.sim.state.sectorAllocations, this.sim.state.totalBudgetBillion);
 
-    // If excessive deficit (>120%), warn player
+    // If excessive deficit (>125%), warn player
     if (totals.totalAllocatedPercent > 125) {
       alert(this.i18n.getLang() === 'hi' 
         ? '⚠️ चेतावनी: बजट आवंटन 125% से अधिक है! इससे अत्यधिक महंगाई और ऋण संकट हो सकता है।' 
@@ -484,21 +509,28 @@ class RashtraNitiApp {
     if (!modal) return;
     const lang = this.i18n.getLang();
 
+    const title = lang === 'hi' ? (eventObj.titleHindi || eventObj.title) : eventObj.title;
+    const desc = lang === 'hi' ? (eventObj.descHindi || eventObj.description) : eventObj.description;
+    const category = lang === 'hi' ? (eventObj.categoryHindi || eventObj.category) : eventObj.category;
+
     document.getElementById('event-icon').textContent = eventObj.icon;
-    document.getElementById('event-category').textContent = eventObj.category;
-    document.getElementById('event-title').textContent = lang === 'hi' ? (eventObj.titleHindi || eventObj.title) : eventObj.title;
-    document.getElementById('event-desc').textContent = eventObj.description;
+    document.getElementById('event-category').textContent = category;
+    document.getElementById('event-title').textContent = title;
+    document.getElementById('event-desc').textContent = desc;
 
     const optionsContainer = document.getElementById('event-options-container');
     if (optionsContainer) {
       optionsContainer.innerHTML = eventObj.options
         .map(
-          (opt, idx) => `
-          <button class="event-option-btn" onclick="window.gameApp.chooseEventOption(${idx})">
-            <div class="opt-title">${lang === 'hi' ? (opt.textHindi || opt.text) : opt.text}</div>
-            ${opt.costBillion > 0 ? `<div class="opt-cost">${this.i18n.t('costLabel')} ₹${opt.costBillion} Billion</div>` : `<div class="opt-cost free">${this.i18n.t('costLabel')} ${this.i18n.t('freeCost')}</div>`}
-          </button>
-        `
+          (opt, idx) => {
+            const optText = lang === 'hi' ? (opt.textHindi || opt.text) : opt.text;
+            return `
+              <button class="event-option-btn" onclick="window.gameApp.chooseEventOption(${idx})">
+                <div class="opt-title">${optText}</div>
+                ${opt.costBillion > 0 ? `<div class="opt-cost">${this.i18n.t('costLabel')} ₹${opt.costBillion} Billion</div>` : `<div class="opt-cost free">${this.i18n.t('costLabel')} ${this.i18n.t('freeCost')}</div>`}
+              </button>
+            `;
+          }
         )
         .join('');
     }
@@ -524,21 +556,24 @@ class RashtraNitiApp {
     this.saveGame();
 
     // Show Year In Review modal
-    this.openYearInReviewModal(report, chosenOption.feedback);
+    this.openYearInReviewModal(report, chosenOption);
   }
 
-  openYearInReviewModal(report, eventFeedback) {
+  openYearInReviewModal(report, chosenOption) {
     const modal = document.getElementById('modal-review');
     if (!modal) return;
     const lang = this.i18n.getLang();
 
+    const headline = lang === 'hi' ? (report.headlineHindi || report.headline) : report.headline;
+    const feedback = chosenOption ? (lang === 'hi' ? (chosenOption.feedbackHindi || chosenOption.feedback) : chosenOption.feedback) : '';
+
     document.getElementById('review-year-title').textContent = lang === 'hi' 
       ? `वर्ष ${report.year} का वार्षिक लेखा-जोखा (Annual Review)`
       : `Year ${report.year} Annual Debrief & Review`;
-    document.getElementById('review-headline').textContent = report.headline;
+    document.getElementById('review-headline').textContent = headline;
     document.getElementById('review-event-feedback').textContent = lang === 'hi'
-      ? `⚡ घटनाक्रम परिणाम: ${eventFeedback || 'वर्ष सामान्य रूप से संपन्न हुआ।'}`
-      : `⚡ Event Consequence: ${eventFeedback || 'Fiscal year concluded steadily.'}`;
+      ? `⚡ घटनाक्रम परिणाम: ${feedback || 'वर्ष सामान्य रूप से संपन्न हुआ।'}`
+      : `⚡ Event Consequence: ${feedback || 'Fiscal year concluded steadily.'}`;
 
     document.getElementById('rev-gdp').textContent = `₹${report.gdp}T`;
     document.getElementById('rev-growth').textContent = `+${report.growth}%`;
@@ -551,7 +586,8 @@ class RashtraNitiApp {
   closeYearInReview() {
     this.sound.playClick();
     const modal = document.getElementById('modal-review');
-    if (modal) modal.classList.remove('open');
+    if (!modal) return;
+    modal.classList.remove('open');
 
     // Check if 5-Year Term is Complete -> Trigger Democratic Election!
     if (this.sim.state.termYear > 5) {
@@ -580,8 +616,8 @@ class RashtraNitiApp {
         .map(
           (m, idx) => `
           <div class="manifesto-card" onclick="window.gameApp.selectManifesto(${idx})">
-            <div class="manifesto-title">📜 ${lang === 'hi' ? m.titleHindi : m.title}</div>
-            <div class="manifesto-desc">${this.i18n.t('costLabel')} ₹${m.costBillion}B | ${m.focus} support boost</div>
+            <div class="manifesto-title">📜 ${lang === 'hi' ? (m.titleHindi || m.title) : m.title}</div>
+            <div class="manifesto-desc">${this.i18n.t('costLabel')} ₹${m.costBillion}B</div>
           </div>
         `
         )
@@ -697,7 +733,9 @@ class RashtraNitiApp {
     container.innerHTML = policies
       .map((p) => {
         const isEnacted = s.enactedPolicies.includes(p.id);
-        const title = lang === 'hi' ? p.titleHindi : p.title;
+        const title = lang === 'hi' ? (p.titleHindi || p.title) : p.title;
+        const desc = lang === 'hi' ? (p.descHindi || p.description) : p.description;
+        const cat = lang === 'hi' ? (p.categoryHindi || p.category) : p.category;
         const inflationTag = lang === 'hi' ? 'महंगाई' : 'Inflation';
         const stabilityTag = lang === 'hi' ? 'स्थिरता' : 'Stability';
 
@@ -707,10 +745,10 @@ class RashtraNitiApp {
               <span class="policy-icon">${p.icon}</span>
               <div class="policy-info">
                 <div class="policy-title">${title}</div>
-                <div class="policy-cat">${p.category} • ${this.i18n.t('initialCost')}: ₹${p.costBillion}B</div>
+                <div class="policy-cat">${cat} • ${this.i18n.t('initialCost')}: ₹${p.costBillion}B</div>
               </div>
             </div>
-            <div class="policy-desc">${p.description}</div>
+            <div class="policy-desc">${desc}</div>
             <div class="policy-effects">
               ${p.effects.gdpGrowth ? `<span class="effect-tag">+${p.effects.gdpGrowth}% GDP</span>` : ''}
               ${p.effects.inflation ? `<span class="effect-tag">${p.effects.inflation}% ${inflationTag}</span>` : ''}
@@ -746,7 +784,7 @@ class RashtraNitiApp {
       this.sim.state.govtStability = Math.min(99, this.sim.state.govtStability + 4);
       this.saveGame();
       this.renderPoliciesScreen();
-      const title = lang === 'hi' ? policy.titleHindi : policy.title;
+      const title = lang === 'hi' ? (policy.titleHindi || policy.title) : policy.title;
       this.showToast(lang === 'hi' ? `🏛️ बिल पारित! '${title}' संसद में पास हुआ।` : `🏛️ Bill Passed! '${title}' enacted.`);
     } else {
       this.showToast(lang === 'hi' ? `❌ बिल खारिज! संसद में बहुमत नहीं मिला।` : `❌ Bill Defeated! Lacked parliamentary majority.`);
@@ -755,6 +793,7 @@ class RashtraNitiApp {
 
   renderParliamentScreen() {
     const s = this.sim.state;
+    const lang = this.i18n.getLang();
     const parliament = window.GAME_FACTIONS?.parliament;
     if (!parliament) return;
 
@@ -777,16 +816,21 @@ class RashtraNitiApp {
     if (partyContainer) {
       partyContainer.innerHTML = parliament.parties
         .map(
-          (party) => `
-          <div class="party-card">
-            <div class="party-header">
-              <span class="party-bullet" style="background: ${party.color};"></span>
-              <span class="party-name">${party.name}</span>
-              <span class="party-seats">${party.initialSeats} ${this.i18n.t('seatsLabel')}</span>
-            </div>
-            <div class="party-meta">${party.alignment} • ${this.i18n.t('ideologyLabel')} ${party.ideology}</div>
-          </div>
-        `
+          (party) => {
+            const pName = lang === 'hi' ? (party.nameHindi || party.name) : party.name;
+            const pAlign = lang === 'hi' ? (party.alignmentHindi || party.alignment) : party.alignment;
+            const pIdeo = lang === 'hi' ? (party.ideologyHindi || party.ideology) : party.ideology;
+            return `
+              <div class="party-card">
+                <div class="party-header">
+                  <span class="party-bullet" style="background: ${party.color};"></span>
+                  <span class="party-name">${pName}</span>
+                  <span class="party-seats">${party.initialSeats} ${this.i18n.t('seatsLabel')}</span>
+                </div>
+                <div class="party-meta">${pAlign} • ${this.i18n.t('ideologyLabel')} ${pIdeo}</div>
+              </div>
+            `;
+          }
         )
         .join('');
     }
@@ -794,10 +838,13 @@ class RashtraNitiApp {
 
   renderCountryProfile() {
     const s = this.sim.state;
-    document.getElementById('profile-country-title').textContent = s.countryName;
-    document.getElementById('profile-pm-title').textContent = `${s.pmName} • Term ${s.term}`;
+    const lang = this.i18n.getLang();
+    const resUnit = lang === 'hi' ? 'बिलियन' : 'Billion';
 
-    document.getElementById('prof-reserves').textContent = `₹${s.foreignReservesBillion} Billion`;
+    document.getElementById('profile-country-title').textContent = s.countryName;
+    document.getElementById('profile-pm-title').textContent = `${s.pmName} • ${lang === 'hi' ? `कार्यकाल ${s.term}` : `Term ${s.term}`}`;
+
+    document.getElementById('prof-reserves').textContent = `₹${s.foreignReservesBillion} ${resUnit}`;
     document.getElementById('prof-debt-gdp').textContent = `${s.debtToGdpRatio}%`;
     document.getElementById('prof-corruption').textContent = `${s.corruptionIndex}/100`;
     document.getElementById('prof-security').textContent = `${s.nationalSecurityIndex}/100`;
