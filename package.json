@@ -1,0 +1,20 @@
+{
+  "name": "rashtraniti",
+  "version": "1.0.0",
+  "description": "राष्ट्रनीति (RashtraNiti) - Democracy, Government and Budget Management Simulation Game",
+  "main": "index.html",
+  "scripts": {
+    "prepare-www": "powershell -Command \"if (Test-Path www) { Remove-Item -Recurse -Force www }; New-Item -ItemType Directory -Force -Path www; Copy-Item index.html,style.css,manifest.json,sw.js www/; Copy-Item -Recurse -Force src www/src\"",
+    "build": "npm run prepare-www && npx cap sync",
+    "start": "npx serve . -l 3000",
+    "dev": "npx serve . -l 3000"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/core": "^7.0.0"
+  },
+  "keywords": ["game", "simulation", "politics", "budget", "democracy", "rashtraniti"],
+  "author": "RashtraNiti Studios",
+  "license": "MIT"
+}
