@@ -37,4 +37,9 @@ if (fs.existsSync(srcDir)) {
   copyDir(srcDir, path.join(wwwDir, 'src'));
 }
 
+const assetsDir = path.join(__dirname, '..', 'assets');
+if (fs.existsSync(assetsDir)) {
+  copyDir(assetsDir, path.join(wwwDir, 'assets'));
+}
+
 console.log('✓ www directory prepared successfully (Cross-Platform Node.js)');
