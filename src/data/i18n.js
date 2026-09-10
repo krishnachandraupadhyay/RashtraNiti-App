@@ -5,8 +5,8 @@ class I18nEngine {
     this.translations = {
       hi: {
         // App & Meta
-        appName: 'Shaumya Gamers',
-        appTagline: 'राष्ट्रनीति - लोकतंत्र, सरकार और बजट प्रबंधन गेम',
+        appName: 'राष्ट्रनीति',
+        appTagline: 'लोकतंत्र, सरकार और बजट प्रबंधन सिमुलेशन गेम',
         republicTag: 'गणतांत्रिक नीति सिमुलेशन',
         countryDefault: 'गणराज्य भारतवर्ष',
         pmDefault: 'माननीय प्रधानमंत्री',
@@ -123,8 +123,8 @@ class I18nEngine {
 
       en: {
         // App & Meta
-        appName: 'Shaumya Gamers',
-        appTagline: 'RashtraNiti - Democracy & Governance Simulation Game',
+        appName: 'RashtraNiti',
+        appTagline: 'Democracy, Government & Budget Management Simulator',
         republicTag: 'Democratic Policy Simulator',
         countryDefault: 'Republic of Bharatvarsha',
         pmDefault: 'Honorable Prime Minister',
