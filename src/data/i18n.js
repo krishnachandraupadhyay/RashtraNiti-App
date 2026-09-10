@@ -41,7 +41,7 @@ class I18nEngine {
         gdpTrendWait: 'आगामी वर्षों के बाद आर्थिक रुझान चार्ट यहाँ दिखेगा',
         demographicsTitle: 'जनसांख्यिकीय संतुष्टि',
         prepareBudgetBtn: 'बजट तैयार करें और वर्ष आगे बढ़ाएं',
-        yearPill: (y, t, ty) => `वर्ष ${y} (कार्यकाल ${t}, वर्ष ${ty}/5)`,
+        yearPill: (y, t, ty) => `वर्ष ${y} • T${t}`,
 
         // Budget Screen
         budgetTitle: 'मंत्रालयों का बजट आवंटन',
@@ -159,7 +159,7 @@ class I18nEngine {
         gdpTrendWait: 'Historical growth chart will appear after subsequent fiscal years',
         demographicsTitle: 'Demographic Approval Breakdown',
         prepareBudgetBtn: 'Prepare Budget & Advance Year',
-        yearPill: (y, t, ty) => `Year ${y} (Term ${t}, Year ${ty}/5)`,
+        yearPill: (y, t, ty) => `Yr ${y} • T${t}`,
 
         // Budget Screen
         budgetTitle: 'Ministerial Sector Budget Allocations',

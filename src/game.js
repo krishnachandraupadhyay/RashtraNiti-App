@@ -204,7 +204,7 @@ class RashtraNitiApp {
   renderAvatarPreview() {
     const headerAvatar = document.querySelector('.header-avatar-mini');
     if (headerAvatar) {
-      headerAvatar.innerHTML = this.avatar.renderSVG(44);
+      headerAvatar.innerHTML = this.avatar.renderSVG(48);
     }
 
     const homeAvatar = document.getElementById('home-avatar-preview');

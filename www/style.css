@@ -231,20 +231,25 @@ body {
    APP HEADER & TOP APP BAR
    ========================================================================== */
 .app-top-header {
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-subtle);
-  padding: 12px 16px;
+  padding: max(14px, env(safe-area-inset-top, 14px)) 14px 12px 14px;
   position: sticky;
   top: 0;
   z-index: 50;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .lang-toggle-btn {
@@ -260,6 +265,7 @@ body {
   align-items: center;
   gap: 6px;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 
 .lang-toggle-btn:active {
@@ -268,33 +274,37 @@ body {
 }
 
 .lang-toggle-btn.mini {
-  padding: 4px 10px;
+  padding: 4px 8px;
   font-size: 0.72rem;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 .header-pm-profile {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   cursor: pointer;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
 .header-avatar-mini {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  max-width: 44px;
-  max-height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid var(--accent-gold);
-  background: var(--bg-surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  border: 2px solid var(--accent-gold) !important;
+  background: var(--bg-surface) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.25) !important;
 }
 
 .pm-avatar-container {
@@ -317,35 +327,48 @@ body {
   flex-direction: column;
   justify-content: center;
   min-width: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
 .header-pm-title {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: block;
 }
 
 .header-country-sub {
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   color: var(--accent-gold);
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: block;
+}
+
+.header-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .header-year-pill {
   background: rgba(245, 158, 11, 0.15);
   border: 1px solid var(--border-gold);
-  padding: 6px 12px;
-  border-radius: 12px;
-  font-size: 0.78rem;
+  padding: 5px 8px;
+  border-radius: 10px;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--accent-gold);
-  text-align: right;
+  white-space: nowrap;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 /* Breaking News Ticker */
